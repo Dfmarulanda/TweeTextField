@@ -11,7 +11,7 @@ open class TweeAttributedTextField: TweeActiveTextField {
 	/// You can use it to configure appearance.
 	 public private(set) lazy var infoLabel = { () -> UILabel in
 	    let label = UILabel()
-	    label.numberOfLines = 0
+	    label.numberOfLines = 3
 	    return label
 	  }()
 	/// Animation duration for showing and hiding the info label.
