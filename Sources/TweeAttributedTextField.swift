@@ -111,7 +111,7 @@ open class TweeAttributedTextField: TweeActiveTextField {
 		NSLayoutConstraint.activate([
 			infoLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
 			infoLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-			infoLabel.topAnchor.constraint(equalTo: bottomAnchor, constant: 2)
+			infoLabel.topAnchor.constraint(equalTo: bottomAnchor, constant: 14)
 			])
 	}
 }
