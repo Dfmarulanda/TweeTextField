@@ -9,8 +9,11 @@ open class TweeAttributedTextField: TweeActiveTextField {
 
 	/// Info label that is shown for a user. This label will appear under the text field.
 	/// You can use it to configure appearance.
-	public private(set) lazy var infoLabel = UILabel()
-
+	 public private(set) lazy var infoLabel = { () -> UILabel in
+	    let label = UILabel()
+	    label.numberOfLines = 0
+	    return label
+	  }()
 	/// Animation duration for showing and hiding the info label.
 	@IBInspectable public var infoAnimationDuration: Double = 1
 
