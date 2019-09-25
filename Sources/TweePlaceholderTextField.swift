@@ -185,7 +185,7 @@ open class TweePlaceholderTextField: UITextField {
 		centerYConstraint.priority = .defaultHigh
 
         NSLayoutConstraint.activate([
-            placeholderLabel.bottomAnchor.constraint(equalTo: placeholderLayoutGuide.topAnchor, constant: -16),
+            placeholderLabel.bottomAnchor.constraint(equalTo: placeholderLayoutGuide.topAnchor, constant: 0),
             centerYConstraint
             ])
 
