@@ -44,7 +44,7 @@ open class TweePlaceholderTextField: UITextField {
 	}
 
 	/// The string that is displayed when there is no other text in the text field.
-	@IBInspectable public var tweePlaceholder: String? {
+	@IBInspectable open var tweePlaceholder: String? {
 		get {
 			return placeholderLabel.text
 		} set {
