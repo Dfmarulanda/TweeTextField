@@ -27,8 +27,11 @@ open class TweeAttributedTextField: TweeActiveTextField {
 
 	/// Info label that is shown for a user. This label will appear under the text field.
 	/// You can use it to configure appearance.
-	public private(set) lazy var infoLabel = UILabel()
-
+	 public private(set) lazy var infoLabel = { () -> UILabel in
+	    let label = UILabel()
+	    label.numberOfLines = 3
+	    return label
+	  }()
 	/// Animation duration for showing and hiding the info label.
 	@IBInspectable public var infoAnimationDuration: Double = 1
 
@@ -129,9 +132,9 @@ open class TweeAttributedTextField: TweeActiveTextField {
 		infoLabel.translatesAutoresizingMaskIntoConstraints = false
 
 		NSLayoutConstraint.activate([
-			infoLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .zero),
-			infoLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: .zero),
-			infoLabel.topAnchor.constraint(equalTo: bottomAnchor, constant: 2)
+			infoLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
+			infoLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+			infoLabel.topAnchor.constraint(equalTo: bottomAnchor, constant: 14)
 			])
 	}
 }

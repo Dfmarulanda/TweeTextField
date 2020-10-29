@@ -1,23 +1,5 @@
-//
-//  Copyright (c) 2017-2020 Oleg Hnidets
-//
-//  Permission is hereby granted, free of charge, to any person obtaining a copy
-//  of this software and associated documentation files (the "Software"), to deal
-//  in the Software without restriction, including without limitation the rights
-//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//  copies of the Software, and to permit persons to whom the Software is
-//  furnished to do so, subject to the following conditions:
-//
-//  The above copyright notice and this permission notice shall be included in all
-//  copies or substantial portions of the Software.
-//
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-//  SOFTWARE.
+//  Created by Daniel Marulanda on 21/09/19.
+//  Copyright © 2017-2019 Oleg Hnidets. All rights reserved.
 //
 
 import UIKit
@@ -62,7 +44,7 @@ open class TweePlaceholderTextField: UITextField {
 	}
 
 	/// The string that is displayed when there is no other text in the text field.
-	@IBInspectable public var tweePlaceholder: String? {
+	@IBInspectable open var tweePlaceholder: String? {
 		get {
 			placeholderLabel.text
 		} set {
@@ -114,9 +96,6 @@ open class TweePlaceholderTextField: UITextField {
 		target: WeakTargetProxy(target: self),
 		selector: #selector(maximizePlaceholderFontSize)
 	)
-
-	// Constraint properties
-
 	private let placeholderLayoutGuide = UILayoutGuide()
 	private var leadingPlaceholderConstraint: NSLayoutConstraint?
 	private var trailingPlaceholderConstraint: NSLayoutConstraint?
@@ -155,8 +134,6 @@ open class TweePlaceholderTextField: UITextField {
 	}
 
 	private func initializeSetup() {
-		observe()
-
 		configurePlaceholderLabel()
 	}
 
@@ -204,7 +181,6 @@ open class TweePlaceholderTextField: UITextField {
 	}
 
 	private func setPlaceholderSizeImmediately() {
-		if let text = text, text.isEmpty == false {
 			enablePlaceholderHeightConstraint()
 			placeholderLabel.font = placeholderLabel.font.withSize(minimumPlaceholderFontSize)
 		} else if isEditing == false {
@@ -293,6 +269,8 @@ open class TweePlaceholderTextField: UITextField {
 		}
 	}
 
+
+
 	private func addPlaceholderLabelIfNeeded() {
 		if placeholderLabel.superview != nil {
 			return
@@ -310,6 +288,16 @@ open class TweePlaceholderTextField: UITextField {
         trailingPlaceholderConstraint?.identifier = "twee.placeholder.trailing"
         bottomPlaceholderConstraint = placeholderLabel.bottomAnchor.constraint(equalTo: placeholderLayoutGuide.topAnchor)
         bottomPlaceholderConstraint?.identifier = "twee.placeholder.bottom"
+		trailingPlaceholderConstraint?.isActive = true
+
+		addLayoutGuide(placeholderLayoutGuide)
+
+		NSLayoutConstraint.activate([
+			placeholderLayoutGuide.leadingAnchor.constraint(equalTo: leadingAnchor),
+			placeholderLayoutGuide.trailingAnchor.constraint(equalTo: trailingAnchor),
+			placeholderLayoutGuide.bottomAnchor.constraint(equalTo: bottomAnchor)
+			])
+
 
 		let centerYConstraint = placeholderLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
 		centerYConstraint.priority = .defaultHigh
@@ -322,7 +310,7 @@ open class TweePlaceholderTextField: UITextField {
             placeholderLayoutGuide.trailingAnchor.constraint(equalTo: trailingAnchor),
             placeholderLayoutGuide.bottomAnchor.constraint(equalTo: bottomAnchor),
             bottomPlaceholderConstraint,
-            centerYConstraint
+            placeholderLabel.bottomAnchor.constraint(equalTo: placeholderLayoutGuide.topAnchor, constant: 0),            centerYConstraint
             ].compactMap { $0 }
         )
 
